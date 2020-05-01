@@ -49,13 +49,12 @@
                 </div>
                
                 <div align="center">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <form  method="get">
                         <div class="input-group">
-                            <input type="search" name="search" class="form-control">
-                            <span class="input-group-prepend">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </span>
+                            
+                        <button type="button" class="btn btn-primary btn-lg btn-block">Search</button>
+                           
                         </div>
                     </form>
                 </div>

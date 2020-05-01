@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+Route::get('/dashboard','DashboardController@index');
+Route::get('/_login','AuthController@index');
+Route::post('/postlogin','AuthController@postlogin');
+
 //Template
 Route::get('/index','AdminController@index');
 //Categori
