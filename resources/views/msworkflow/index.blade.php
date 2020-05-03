@@ -24,41 +24,38 @@
         <h3 class="card-title">Master Workflow</h3>
       </div>
         <div class="card-body">
-          
-        
         <form>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Workflow Code</label>
-                <input type="text"  class="form-control" id="inputEmail4">
-            </div>
-            <div class="form-group col-md-6">
-                  <label for="inputEmail4">Workflow Name</label>
-                    <input type="text"  class="form-control" id="inputEmail4">
-            </div>
-          </div>
-                <div class="form-row">
+            <form action="/search" method="get">
+                <div class="input-group">
                     <div class="form-group col-md-6">
-                    <label for="inputEmail4">Status</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                        <option>TRUE</option>
-                        <option>FALSE</option>
-                        
+                        <label for="inputEmail4">Workflow Code</label>
+                        <input type="search" name="search" class="form-control" id="inputEmail4">
+                    </div>
+                    <div class="input-group">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Workflow Name</label>
+                            <input type="search" name="search2" class="form-control" id="inputEmail4">
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Status</label>
+                        <select type="search" name="search3" class="form-control" id="exampleFormControlSelect1">
+                            <option value="1">TRUE</option>
+                            <option value="0">FALSE</option>
                         </select>
                     </div>
                 </div>
-               
                 <div align="center">
-                <div class="col-md-6">
-                    <form  method="get">
+                    <div class="col-md-6">
                         <div class="input-group">
-                            
-                        <button type="button" class="btn btn-primary btn-lg btn-block">Search</button>
-                           
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Search</button>
                         </div>
-                    </form>
-                </div>
-                </div>
+                    </div>
+                </div>`
+            </form>
+            
                 <div align="right">
                     <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#staticBackdrop">
                          Button Add
@@ -74,41 +71,28 @@
                                     <th scope="col">Version</th>
                                     <th scope="col">Status</th>
                                     <th scope="col"></th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                    <th scope="row">1</th>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td>LinkActivity</td>
-                                    <td>Link Next Activity</td>
-                                    <td>Link Edit</td>   
-                                    </tr>
-                                    <tr>
-                                    <th scope="row">2</th>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td>LinkActivity</td>
-                                    <td>Link Next Activity</td>
-                                    <td>Link Edit</td>  
-                                    </tr>
-                                    
+                                @foreach($msworkflow as $mwf)
+                            <tr>
+                                <td>{{$mwf -> WFID}}</td>
+                                <td>{{$mwf -> WFCode}}</td>
+                                <td>{{$mwf -> WFName}}</td>
+                                <td>{{$mwf -> Version}}</td>
+                                <td>{{$mwf -> Status}}</td>
+                                <td>
+                                    <a href="/msworkflow/{{$mwf->WFID}}/edit" class="btn btn-outline-success">Edit</a>
+                                    <a href="/msworkflow/{{$mwf->WFID}}/destroy" class="btn btn-outline-danger">Hapus</a>
+                                </td>
+                            </tr>
+                        @endforeach
                                 </tbody>
                                 </table>
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-end">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        {{$msworkflow->links()}}
+                                       
                                     </ul>
                                 </nav>
 								</div>
@@ -124,41 +108,43 @@
                                     </button>
                             </div>
                             <div class="modal-body">
-                                <form method="POST">
+                                <form action="/msworkflow/create"method="POST">
+                                {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="inputEmail4">Workflow Code</label>
-                                        <input type="text" maxlength="10" class="form-control" id="inputEmail4">
+                                        <input name="WFCode" type="text" maxlength="10" class="form-control" id="inputEmail4">
                                     </div>
                                     <div class="form-group">
                                     <label for="inputEmail4">Workflow Name</label>
-                                        <input type="text" maxlength="50" class="form-control" id="inputEmail4">
+                                        <input name="WFName" type="text" maxlength="50" class="form-control" id="inputEmail4">
                                     </div>
                                     <div class="form-group">
                                         <div class="form-group ">
                                             <label for="inputEmail4">Status</label>
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>TRUE</option>
-                                            <option>FALSE</option>
+                                            <select name="Status" class="form-control" id="exampleFormControlSelect1">
+                                                <option value="1">TRUE</option>
+                                                <option value="0">FALSE</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                     <label for="inputEmail4">Version</label>
-                                        <input type="text" maxlength="50" placeholder="ReadOnly"class="form-control" id="inputEmail4"readonly>
+                                        <input name="Version" type="text" maxlength="50" placeholder="ReadOnly"class="form-control" id="inputEmail4"ReadOnly>
                                     </div>
                                     
-                                   
                                     <div align="right">
                                     <button type="submit" class="btn btn-primary">Save</button>
                                     </div>
                                 </form>
+                                
+
                             </div>
                            
                         </div>
                     </div>
                 </div> 
         </div>
-      </div>
+    </div>
 
 </section>
  @endsection

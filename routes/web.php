@@ -36,6 +36,14 @@ Route::get('/products','ProductsController@index');
 
 Route::get('/main','MainController@index');
 Route::get('/master','MasterController@index');
+//msworkflow
+Route::post('/msworkflow/create','MasterWorkFlowController@create');
 Route::get('/msworkflow','MasterWorkFlowController@index');
+Route::get('/msworkflow/{WFID}/edit','MasterWorkFlowController@edit');
+Route::post('/msworkflow/{WFID}/update','MasterWorkFlowController@update');
+Route::get('/search','MasterWorkFlowController@search');
+Route::get('/search','MasterWorkFlowController@search2');
+Route::get('/search','MasterWorkFlowController@search3');
+Route::get('/msworkflow/{WFID}/destroy','MasterWorkFlowController@destroy');
 
 
